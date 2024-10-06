@@ -1,0 +1,486 @@
+
+     
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Lịch Chiếu</title>
+    <script src="./js/jsAdmin.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+           #MoreMenu::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 50px;
+    left: 0;
+    top: -30px;
+    position: absolute;
+}
+/* General Body Styling */
+body {
+    font-family: 'Times New Roman', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+}
+
+/* Header */
+#Header {
+    height: 80px;
+    width: 100%;
+    background-color: #4A4A4A;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Menu */
+#Menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+    border-radius: 40px;
+    background-color: #EEE8D8;
+    padding: 0 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+#Menu:hover {
+    background-color: #FFF8DC;
+}
+
+/* Link Menu */
+#Menu a {
+    margin: 0;
+    padding: 10px 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #696969;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+#Menu a:hover {
+    color: #000;
+    font-weight: bold;
+    text-shadow: 0px 0px 8px rgba(254, 78, 47, 0.7);
+}
+
+/* MORE... dropdown */
+#QuanLyTaiKhoan {
+    position: relative;
+    padding: 10px 20px;
+    color: #696969;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#QuanLyTaiKhoan:hover {
+    color: #000;
+    font-weight: bold;
+}
+
+#MoreMenu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #EEE8D8;
+    border-radius: 10px;
+    padding: 10px;
+    width: 220px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#MoreMenu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #696969;
+    font-size: 16px;
+    border-bottom: 1px solid #d1d1d1;
+    transition: color 0.3s ease;
+}
+
+#MoreMenu a:hover {
+    color: #000;
+    text-shadow: 0px 0px 5px rgba(54, 217, 216, 0.7);
+}
+
+/* Show More Menu on hover */
+#QuanLyTaiKhoan:hover #MoreMenu {
+    display: block;
+}
+
+
+        
+
+        /* Section Title */
+        #divTieuDeQuanLy {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #FE4E2F;
+            color: #FFF;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        #TieuDeQuanLy {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        /* Input Form Styling */
+        #InputQuanLy {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #FFF8E8;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #TableInputQuanLy {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        #TextInputQuanLy {
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        #ThongTinInputQuanLy, #ThongTinSelectQuanLy {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease;
+        }
+
+        #ThongTinInputQuanLy:focus, #ThongTinSelectQuanLy:focus {
+            border-color: #FE4E2F;
+        }
+
+        /* Action Buttons */
+        #ChucNangQuanLy {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        #ButtonChucNangQuanLy {
+            padding: 12px 25px;
+            font-size: 16px;
+            color: white;
+            background-color: #36D9D8;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #ButtonChucNangQuanLy:hover {
+            background-color: #FE4E2F;
+        }
+
+        /* Search Input */
+        #TimKiemTableDanhSach {
+            width: 60%;
+            padding: 10px;
+            margin: 10px auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: block;
+        }
+
+        /* Table Styling */
+        #divTableDanhSach {
+            width: 90%;
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #TableDanhSach {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        #TieuDeTableDanhSach td {
+            background-color: #36D9D8;
+            color: white;
+            font-size: 16px;
+            padding: 15px;
+        }
+
+        #TableDanhSach td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #TableDanhSach tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #TableDanhSach tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+    <script>
+        let scheduleData = [];
+        let currentIndex = -1; // Theo dõi mục hiện tại được chỉnh sửa
+
+        function JsThem() {
+            const rap = document.querySelectorAll('#ThongTinSelectQuanLy')[0].value;
+            const phongChieu = document.querySelectorAll('#ThongTinSelectQuanLy')[1].value;
+            const maPhim = document.getElementById("ThongTinInputQuanLy").value;
+            const ngayChieu = document.querySelector('input[type="date"]').value;
+            const gioChieu = document.querySelector('input[type="time"]').value;
+            const thoiLuong = document.querySelectorAll('#ThongTinInputQuanLy')[1].value;
+
+            if (!rap || !phongChieu || !maPhim || !ngayChieu || !gioChieu || !thoiLuong) {
+                alert("Vui lòng điền đầy đủ thông tin.");
+                return;
+            }
+
+            const newEntry = {
+                stt: scheduleData.length + 1,
+                maLichChieu: scheduleData.length + 1,
+                maPhim,
+                thoiGianChieu: `${ngayChieu} ${gioChieu}`,
+                thoiLuong,
+                phongChieu,
+                rapChieu: rap
+            };
+
+            scheduleData.push(newEntry);
+            renderTable();
+            clearInputs();
+            displayMessage("Thông tin đã được thêm thành công!");
+        }
+
+        function JsSua() {
+            if (currentIndex === -1) {
+                alert("Vui lòng chọn lịch chiếu để sửa.");
+                return;
+            }
+
+            const rap = document.querySelectorAll('#ThongTinSelectQuanLy')[0].value;
+            const phongChieu = document.querySelectorAll('#ThongTinSelectQuanLy')[1].value;
+            const maPhim = document.getElementById("ThongTinInputQuanLy").value;
+            const ngayChieu = document.querySelector('input[type="date"]').value;
+            const gioChieu = document.querySelector('input[type="time"]').value;
+            const thoiLuong = document.querySelectorAll('#ThongTinInputQuanLy')[1].value;
+
+            if (!rap || !phongChieu || !maPhim || !ngayChieu || !gioChieu || !thoiLuong) {
+                alert("Vui lòng điền đầy đủ thông tin.");
+                return;
+            }
+
+            const updatedEntry = {
+                stt: currentIndex + 1,
+                maLichChieu: currentIndex + 1,
+                maPhim,
+                thoiGianChieu: `${ngayChieu} ${gioChieu}`,
+                thoiLuong,
+                phongChieu,
+                rapChieu: rap
+            };
+
+            scheduleData[currentIndex] = updatedEntry;
+            renderTable();
+            clearInputs();
+            displayMessage("Thông tin đã được sửa thành công!");
+        }
+
+        function JsXoa() {
+            if (currentIndex === -1) {
+                alert("Vui lòng chọn lịch chiếu để xóa.");
+                return;
+            }
+
+            scheduleData.splice(currentIndex, 1); // Xóa mục khỏi danh sách
+            scheduleData.forEach((entry, index) => entry.stt = index + 1); // Cập nhật STT
+            renderTable();
+            clearInputs();
+            displayMessage("Thông tin đã được xóa thành công!");
+        }
+
+        function renderTable() {
+            const table = document.getElementById("TableDanhSach");
+            table.innerHTML = `
+                <tr id="TieuDeTableDanhSach">
+                    <td style="height: 50px;">STT</td>
+                    <td>Mã lịch chiếu</td>
+                    <td>Mã phim</td>
+                    <td>Thời gian chiếu</td>
+                    <td>Thời lượng</td>
+                    <td>Phòng chiếu</td>
+                    <td>Rạp chiếu</td>
+                </tr>
+            `;
+
+            scheduleData.forEach((entry, index) => {
+                const row = table.insertRow();
+                row.insertCell(0).innerText = entry.stt;
+                row.insertCell(1).innerText = entry.maLichChieu;
+                row.insertCell(2).innerText = entry.maPhim;
+                row.insertCell(3).innerText = entry.thoiGianChieu;
+                row.insertCell(4).innerText = entry.thoiLuong;
+                row.insertCell(5).innerText = entry.phongChieu;
+                row.insertCell(6).innerText = entry.rapChieu;
+
+                row.addEventListener('click', () => {
+                    currentIndex = index; // Gán currentIndex bằng chỉ số của hàng
+                    fillInputs(entry); // Điền dữ liệu của mục được chọn vào các ô input
+                });
+            });
+        }
+
+        function fillInputs(entry) {
+            document.querySelectorAll('#ThongTinSelectQuanLy')[0].value = entry.rapChieu;
+            document.querySelectorAll('#ThongTinSelectQuanLy')[1].value = entry.phongChieu;
+            document.getElementById("ThongTinInputQuanLy").value = entry.maPhim;
+            const [ngayChieu, gioChieu] = entry.thoiGianChieu.split(' ');
+            document.querySelector('input[type="date"]').value = ngayChieu;
+            document.querySelector('input[type="time"]').value = gioChieu;
+            document.querySelectorAll('#ThongTinInputQuanLy')[1].value = entry.thoiLuong;
+        }
+
+        function clearInputs() {
+            document.querySelectorAll('#ThongTinSelectQuanLy')[0].selectedIndex = 0;
+            document.querySelectorAll('#ThongTinSelectQuanLy')[1].selectedIndex = 0;
+            document.getElementById("ThongTinInputQuanLy").value = "";
+            document.querySelector('input[type="date"]').value = "";
+            document.querySelector('input[type="time"]').value = "";
+            document.querySelectorAll('#ThongTinInputQuanLy')[1].value = "";
+            currentIndex = -1;
+        }
+
+        function displayMessage(message) {
+            const messageBox = document.getElementById("message");
+            messageBox.textContent = message;
+            messageBox.style.display = "block";
+            setTimeout(() => {
+                messageBox.style.display = "none";
+            }, 3000);
+        }
+    </script>
+</head>
+
+    <body>
+    <div id="Header">
+        <div id="Menu">
+            <a href="Home.html"><p id="LinkMenu">Home</p></a>
+            <a href="QuanLyTaiKhoan.html"><p id="LinkMenu">Quản Lý Tài Khoản</p></a>
+            <a href="QuanLyPhim.html"><p id="LinkMenu">Quản Lý Phim</p></a>
+            <a href="QuanLyLichChieu.html"><p id="LinkMenu">Quản Lý Lịch Chiếu</p></a>
+            <a href="QuanLyDatVe.html"><p id="LinkMenu">Quản Lý Đặt Vé</p></a>
+            <div id="QuanLyTaiKhoan">
+                MORE...
+                <div id="MoreMenu">
+                    <a href="/Code-Admin/html/quanlighe.html">Quản Lý Ghế</a>
+                    <a href="/Code-Admin/html/quanlisukien.html">Quản Lý Sự Kiện</a>
+                    <a href="/Code-Admin/html/quanliphongchieu.html">Quản Lý Phòng Chiếu</a>
+                    <a href="/Code-Admin/html/thongke.html">Thống Kê</a>
+                    <a href="/Code-Admin/html/quanlikhuyenmai.html">Quản Lý Khuyến Mãi</a>
+                    <a href="/Code-Admin/html/quanlikhachhang.html">Quản Lý Khách Hàng</a>
+                    <a href="/Code-Admin/html/quanlinhanvien.html">Quản Lý Nhân Viên</a>
+                    <a href="/Code-Admin/html/hotrokhachhang.html">Hỗ Trợ Khách Hàng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="divTieuDeQuanLy">
+        <div id="TieuDeQuanLy">QUẢN LÝ LỊCH CHIẾU</div>
+    </div>
+
+    <div id="InputQuanLy">
+        <div id="message"></div> <!-- Thông báo thêm vào đây -->
+        <table id="TableInputQuanLy">
+            <tr>
+                <td id="TextInputQuanLy">Rạp chiếu:</td>
+                <td>
+                    <select id="ThongTinSelectQuanLy">
+                        <option value="">Chọn rạp</option>
+                        <option value="Rạp 1">Rạp 1</option>
+                        <option value="Rạp 2">Rạp 2</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td id="TextInputQuanLy">Phòng chiếu:</td>
+                <td>
+                    <select id="ThongTinSelectQuanLy">
+                        <option value="">Chọn phòng</option>
+                        <option value="Phòng 1">Phòng 1</option>
+                        <option value="Phòng 2">Phòng 2</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td id="TextInputQuanLy">Mã phim:</td>
+                <td>
+                    <input id="ThongTinInputQuanLy" type="text" placeholder="Nhập mã phim">
+                </td>
+            </tr>
+            <tr>
+                <td id="TextInputQuanLy">Ngày chiếu:</td>
+                <td>
+                    <input type="date" placeholder="Chọn ngày chiếu">
+                </td>
+            </tr>
+            <tr>
+                <td id="TextInputQuanLy">Giờ chiếu:</td>
+                <td>
+                    <input type="time" placeholder="Chọn giờ chiếu">
+                </td>
+            </tr>
+            <tr>
+                <td id="TextInputQuanLy">Thời lượng:</td>
+                <td>
+                    <input id="ThongTinInputQuanLy" type="text" placeholder="Nhập thời lượng (phút)">
+                </td>
+            </tr>
+        </table>
+        <div id="ChucNangQuanLy">
+            <button id="ButtonChucNangQuanLy" onclick="JsThem()">Thêm</button>
+            <button id="ButtonChucNangQuanLy" onclick="JsSua()">Sửa</button>
+            <button id="ButtonChucNangQuanLy" onclick="JsXoa()">Xóa</button>
+        </div>
+    </div>
+
+    <input id="TimKiemTableDanhSach" type="text" placeholder="Tìm kiếm lịch chiếu...">
+
+    <div id="divTableDanhSach">
+        <table id="TableDanhSach">
+            <tr id="TieuDeTableDanhSach">
+                <td style="height: 50px;">STT</td>
+                <td>Mã lịch chiếu</td>
+                <td>Mã phim</td>
+                <td>Thời gian chiếu</td>
+                <td>Thời lượng</td>
+                <td>Phòng chiếu</td>
+                <td>Rạp chiếu</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

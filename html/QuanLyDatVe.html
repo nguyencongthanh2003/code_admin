@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Đặt Vé</title>
+    <link rel="stylesheet" type="text/css" href="../css/cssAdmin.css">
+    <script src="../js/jsAdmin.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        #header {
+            background: linear-gradient(135deg, #6e48e5, #9d50bb);
+            padding: 20px;
+        }
+
+        #menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 20px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        #menu a:hover,
+        #menu a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffdd57;
+        }
+
+        #content {
+            padding: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+        }
+
+        .section-title h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #6e48e5;
+        }
+
+        hr {
+            border: 1px solid #6e48e5;
+            width: 50%;
+            margin: 10px auto;
+        }
+
+        #functions {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .btn {
+            background-color: #6e48e5;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #9d50bb;
+        }
+
+        .modal {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 90%;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .search {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search select,
+        .search input {
+            padding: 10px;
+            margin: 0 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #6e48e5;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #d9d9d9;
+        }
+
+        .price-input {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .price-input input {
+            padding: 10px;
+            margin: 0 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        /* Styling for Food and Drink Section */
+        #foodDrinkSection {
+            margin: 20px 0;
+        }
+
+        #foodDrinkMenu select {
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        #selectedFoodDrinkList ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #selectedFoodDrinkList ul li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            position: relative;
+        }
+
+        .remove-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #totalCost {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="Header">
+        <div id="Menu">
+            <a href="Home.html"><p id="LinkMenu">Home</p></a>
+            <a href="QuanLyTaiKhoan.html"><p id="LinkMenu">Quản Lý Tài Khoản</p></a>
+            <a href="QuanLyPhim.html"><p id="LinkMenu">Quản Lý Phim</p></a>
+            <a href="QuanLyLichChieu.html"><p id="LinkMenu">Quản Lý Lịch Chiếu</p></a>
+            <a href="QuanLyDatVe.html"><p id="LinkMenu">Quản Lý Đặt Vé</p></a>
+            <div id="QuanLyTaiKhoan">
+                MORE...
+                <div id="MoreMenu">
+                    <a href="/Code-Admin/html/quanlighe.html">Quản Lý Ghế</a>
+                    <a href="/Code-Admin/html/quanlisukien.html">Quản Lý Sự Kiện</a>
+                    <a href="/Code-Admin/html/quanliphongchieu.html">Quản Lý Phòng Chiếu</a>
+                    <a href="/Code-Admin/html/thongke.html">Thống Kê</a>
+                    <a href="/Code-Admin/html/quanlikhuyenmai.html">Quản Lý Khuyến Mãi</a>
+                    <a href="/Code-Admin/html/quanlikhachhang.html">Quản Lý Khách Hàng</a>
+                    <a href="/Code-Admin/html/quanlinhanvien.html">Quản Lý Nhân Viên</a>
+                    <a href="/Code-Admin/html/hotrokhachhang.html">Hỗ Trợ Khách Hàng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="section-title">
+            <h2>Danh Sách Vé</h2>
+            <hr />
+        </div>
+        <div id="functions">
+            <button class="btn" onclick="JsVeDaDat()">Vé đã đặt</button>
+            <button class="btn" onclick="JsVeConTrong()">Vé còn trống</button>
+            <button class="btn" onclick="JsVeBiHuy()">Vé bị hủy</button>
+        </div>
+
+        <!-- Modal for displaying ticket information -->
+        <div id="VeDaDat" class="modal" style="display: none;">
+            <div class="modal-header">
+                <h2>Danh sách vé</h2>
+                <button class="close" onclick="JsThoatXemVe()">X</button>
+            </div>
+            <div class="table-container">
+                <table id="TableVe">
+                    <!-- Dynamic rows will be populated here -->
+                </table>
+            </div>
+        </div>
+
+        <!-- Input for regular and weekend prices -->
+        <div class="price-input">
+            <label for="regularPrice">Giá vé thường ngày: </label>
+            <input type="text" id="regularPrice" placeholder="Nhập giá vé thường ngày">
+            <label for="weekendPrice">Giá vé cuối tuần: </label>
+            <input type="text" id="weekendPrice" placeholder="Nhập giá vé cuối tuần">
+        </div>
+
+        <!-- Food and Drink Selection Section -->
+        <div id="foodDrinkSection">
+            <div class="section-title">
+                <h2>Chọn Món Ăn / Nước Uống</h2>
+                <hr />
+            </div>
+            <div id="foodDrinkMenu">
+                <label for="foodDrink">Chọn món:</label>
+                <select id="foodDrink">
+                    <option value="Popcorn">Popcorn</option>
+                    <option value="Nước ngọt">Nước ngọt</option>
+                    <option value="Nachos">Nachos</option>
+                    <option value="Combo">Combo</option>
+                </select>
+                <button class="btn" onclick="addFoodDrink()">Thêm</button>
+            </div>
+
+            <!-- Display Selected Items -->
+            <div id="selectedFoodDrinkList">
+                <h3>Danh sách món đã chọn:</h3>
+                <ul id="foodDrinkList"></ul>
+            </div>
+
+            <!-- Total Cost Display -->
+            <div id="totalCost">Tổng Chi Phí: 0 VNĐ</div>
+        </div>
+    </div>
+
+    <script>
+        // Dữ liệu giả lập cho danh sách vé đã đặt, còn trống và bị hủy
+        const veDaDat = [
+            { stt: 1, tenNguoiDat: 'Nguyễn Văn A', email: 'nguyenvana@gmail.com', sdt: '0912345678', ngayDat: '2024-09-29 14:00', doAnKem: 'Popcorn', phongChieu: 'Phòng 1', thoiGianChieu: '15:00', rap: 'Rạp 1' },
+            { stt: 2, tenNguoiDat: 'Trần Thị B', email: 'tranb@gmail.com', sdt: '0909876543', ngayDat: '2024-09-29 16:00', doAnKem: 'Nước ngọt', phongChieu: 'Phòng 2', thoiGianChieu: '17:00', rap: 'Rạp 2' },
+        ];
+
+        const veConTrong = [
+            { stt: 1, phongChieu: 'Phòng 1', thoiGianChieu: '18:00', rap: 'Rạp 1' },
+            { stt: 2, phongChieu: 'Phòng 2', thoiGianChieu: '19:00', rap: 'Rạp 2' },
+        ];
+
+        const veBiHuy = [
+            { stt: 1, tenNguoiDat: 'Lê Văn C', email: 'levanc@gmail.com', sdt: '0901234567', ngayDat: '2024-09-29 16:00', phongChieu: 'Phòng 3', thoiGianChieu: '17:00', rap: 'Rạp 3' },
+        ];
+
+        // Hàm hiển thị vé đã đặt
+        function JsVeDaDat() {
+            const table = document.getElementById('TableVe');
+            table.innerHTML = '<tr><th>STT</th><th>Tên Người Đặt</th><th>Email</th><th>SĐT</th><th>Ngày Đặt</th><th>Món Ăn Kèm</th><th>Phòng Chiếu</th><th>Thời Gian Chiếu</th><th>Rạp</th></tr>';
+            veDaDat.forEach(ve => {
+                const row = table.insertRow();
+                Object.values(ve).forEach(text => {
+                    const cell = row.insertCell();
+                    cell.textContent = text;
+                });
+            });
+            document.getElementById('VeDaDat').style.display = 'block';
+        }
+
+        // Hàm hiển thị vé còn trống
+        function JsVeConTrong() {
+            const table = document.getElementById('TableVe');
+            table.innerHTML = '<tr><th>STT</th><th>Phòng Chiếu</th><th>Thời Gian Chiếu</th><th>Rạp</th></tr>';
+            veConTrong.forEach(ve => {
+                const row = table.insertRow();
+                Object.values(ve).forEach(text => {
+                    const cell = row.insertCell();
+                    cell.textContent = text;
+                });
+            });
+            document.getElementById('VeDaDat').style.display = 'block';
+        }
+
+        // Hàm hiển thị vé bị hủy
+        function JsVeBiHuy() {
+            const table = document.getElementById('TableVe');
+            table.innerHTML = '<tr><th>STT</th><th>Tên Người Đặt</th><th>Email</th><th>SĐT</th><th>Ngày Đặt</th><th>Phòng Chiếu</th><th>Thời Gian Chiếu</th><th>Rạp</th></tr>';
+            veBiHuy.forEach(ve => {
+                const row = table.insertRow();
+                Object.values(ve).forEach(text => {
+                    const cell = row.insertCell();
+                    cell.textContent = text;
+                });
+            });
+            document.getElementById('VeDaDat').style.display = 'block';
+        }
+
+        // Hàm đóng modal xem vé
+        function JsThoatXemVe() {
+            document.getElementById('VeDaDat').style.display = 'none';
+        }
+
+        // Thêm món ăn uống vào danh sách
+        function addFoodDrink() {
+            const selectedFoodDrink = document.getElementById('foodDrink').value;
+            const list = document.getElementById('foodDrinkList');
+            const listItem = document.createElement('li');
+            listItem.textContent = selectedFoodDrink;
+
+            // Tạo nút xóa
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = 'Xóa';
+            removeBtn.className = 'remove-btn';
+            removeBtn.onclick = function() {
+                list.removeChild(listItem);
+                calculateTotalCost();
+            };
+
+            listItem.appendChild(removeBtn);
+            list.appendChild(listItem);
+            calculateTotalCost();
+        }
+
+        // Hàm tính tổng chi phí
+        function calculateTotalCost() {
+            const items = document.querySelectorAll('#foodDrinkList li');
+            let totalCost = 0;
+
+            items.forEach(item => {
+                // Giả sử mỗi món có giá cố định, có thể thay đổi theo nhu cầu
+                totalCost += 50000; // Giá mỗi món ăn
+            });
+
+            document.getElementById('totalCost').textContent = 'Tổng Chi Phí: ' + totalCost + ' VNĐ';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Đăng Nhập - Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #444;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            color: #555;
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"], .edit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            text-align: center;
+        }
+        input[type="submit"]:hover, .edit-btn:hover {
+            background-color: #45a049;
+        }
+        .info-box {
+            margin-bottom: 20px;
+        }
+        .info-box p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .edit-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .form-section {
+            display: none;
+        }
+        .form-section.active {
+            display: block;
+        }
+        .success-message {
+            color: green;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Thông Tin Người Đăng Nhập</h1>
+
+    <div class="container">
+        <!-- Thông tin hiển thị -->
+        <div class="info-box">
+            <p><strong>Tên: </strong><span id="name-info">Nhóm M07</span></p>
+            <p><strong>Email: </strong><span id="email-info">Admin@gmail.com</span></p>
+            <p><strong>Số điện thoại: </strong><span id="phone-info">0123456789</span></p>
+            <button class="edit-btn" onclick="showEditForm()">Đổi mật khẩu</button>
+            <!-- Nút đi tới trang chủ -->
+            <button class="edit-btn" onclick="goToHome()">Đi tới trang chủ</button>
+        </div>
+
+        <!-- Form chỉnh sửa thông tin -->
+        <div class="form-section" id="edit-form">
+            <form id="updateForm">
+               
+                <!-- Thêm trường nhập mật khẩu cũ -->
+                <label for="current-password">Mật khẩu hiện tại:</label>
+                <input type="password" id="current-password" name="current-password" placeholder="Nhập mật khẩu hiện tại" required>
+
+                <!-- Trường nhập mật khẩu mới -->
+                <label for="password">Mật khẩu mới:</label>
+                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu mới" required>
+
+                <!-- Trường xác nhận mật khẩu mới -->
+                <label for="confirm-password">Xác nhận mật khẩu mới:</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Xác nhận mật khẩu mới" required>
+
+                <input type="submit" value="Cập Nhật mật khẩu">
+            </form>
+        </div>
+
+        <!-- Thông báo thành công -->
+        <div class="success-message" id="success-message">
+            Cập nhật thông tin thành công! Đang chuyển hướng...
+        </div>
+    </div>
+
+    <script>
+        function showEditForm() {
+            document.getElementById('edit-form').classList.toggle('active');
+        }
+
+        document.getElementById('updateForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngăn chặn reload trang khi submit form
+
+            var newPassword = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+
+            // Kiểm tra mật khẩu mới và xác nhận mật khẩu có khớp không
+            if (newPassword !== confirmPassword) {
+                alert('Mật khẩu mới và xác nhận mật khẩu không khớp!');
+                return;
+            }
+
+            // Hiện thông báo thành công
+            document.getElementById('success-message').style.display = 'block';
+
+            // Sau 3 giây chuyển hướng đến Home.html
+            setTimeout(function() {
+                window.location.href = 'Home.html';
+            }, 3000);
+        });
+
+        // Chức năng điều hướng tới trang Home
+        function goToHome() {
+            window.location.href = 'Home.html';
+        }
+    </script>
+
+</body>
+</html>

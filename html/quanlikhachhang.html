@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Khách Hàng</title>
+    <style>
+        #MoreMenu::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 50px;
+    left: 0;
+    top: -30px;
+    position: absolute;
+}
+/* General Body Styling */
+body {
+    font-family: 'Times New Roman', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+}
+
+/* Header */
+#Header {
+    height: 80px;
+    width: 100%;
+    background-color: #4A4A4A;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Menu */
+#Menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+    border-radius: 40px;
+    background-color: #EEE8D8;
+    padding: 0 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+#Menu:hover {
+    background-color: #FFF8DC;
+}
+
+/* Link Menu */
+#Menu a {
+    margin: 0;
+    padding: 10px 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #696969;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+#Menu a:hover {
+    color: #000;
+    font-weight: bold;
+    text-shadow: 0px 0px 8px rgba(254, 78, 47, 0.7);
+}
+
+/* MORE... dropdown */
+#QuanLyTaiKhoan {
+    position: relative;
+    padding: 10px 20px;
+    color: #696969;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#QuanLyTaiKhoan:hover {
+    color: #000;
+    font-weight: bold;
+}
+
+#MoreMenu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #EEE8D8;
+    border-radius: 10px;
+    padding: 10px;
+    width: 220px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#MoreMenu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #696969;
+    font-size: 16px;
+    border-bottom: 1px solid #d1d1d1;
+    transition: color 0.3s ease;
+}
+
+#MoreMenu a:hover {
+    color: #000;
+    text-shadow: 0px 0px 5px rgba(54, 217, 216, 0.7);
+}
+
+/* Show More Menu on hover */
+#QuanLyTaiKhoan:hover #MoreMenu {
+    display: block;
+}
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #444;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+        }
+        .add-btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .add-btn:hover {
+            background-color: #45a049;
+        }
+        .search-box {
+            margin-bottom: 20px;
+        }
+        .search-box input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .search-box input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .search-box input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="Header">
+        <div id="Menu">
+            <a href="Home.html"><p id="LinkMenu">Home</p></a>
+            <a href="QuanLyTaiKhoan.html"><p id="LinkMenu">Quản Lý Tài Khoản</p></a>
+            <a href="QuanLyPhim.html"><p id="LinkMenu">Quản Lý Phim</p></a>
+            <a href="QuanLyLichChieu.html"><p id="LinkMenu">Quản Lý Lịch Chiếu</p></a>
+            <a href="QuanLyDatVe.html"><p id="LinkMenu">Quản Lý Đặt Vé</p></a>
+
+            <div id="QuanLyTaiKhoan">
+                MORE...
+                <div id="MoreMenu">
+                    <a href="/Code-Admin/html/quanlighe.html">Quản Lý Ghế</a>
+                    <a href="/Code-Admin/html/quanlisukien.html">Quản Lý Sự Kiện</a>
+                    <a href="/Code-Admin/html/quanliphongchieu.html">Quản Lý Phòng Chiếu</a>
+                    <a href="/Code-Admin/html/thongke.html">Thống Kê</a>
+                    <a href="/Code-Admin/html/quanlikhuyenmai.html">Quản Lý Khuyến Mãi</a>
+                    <a href="/Code-Admin/html/quanlikhachhang.html">Quản Lý Khách Hàng</a>
+                    <a href="/Code-Admin/html/quanlinhanvien.html">Quản Lý Nhân Viên</a>
+                    <a href="/Code-Admin/html/hotrokhachhang.html">Hỗ Trợ Khách Hàng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Quản Lý Khách Hàng</h1>
+
+        <div class="search-box">
+            <form action="/tim-kiem-khach-hang" method="GET">
+                <input type="text" placeholder="Nhập tên khách hàng..." name="search">
+                <input type="submit" value="Tìm Kiếm">
+            </form>
+        </div>
+
+        <a href="/them-khach-hang" class="add-btn">Thêm Khách Hàng</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên Khách Hàng</th>
+                    <th>Email</th>
+                    <th>Số Điện Thoại</th>
+                    <th>Địa Chỉ</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Nguyễn Văn A</td>
+                    <td>vana@gmail.com</td>
+                    <td>0123456789</td>
+                    <td>Hà Nội</td>
+                    <td>
+                        <a href="/sua-khach-hang/1">Sửa</a> |
+                        <a href="/xoa-khach-hang/1" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Trần Thị B</td>
+                    <td>thib@gmail.com</td>
+                    <td>0987654321</td>
+                    <td>TP Hồ Chí Minh</td>
+                    <td>
+                        <a href="/sua-khach-hang/2">Sửa</a> |
+                        <a href="/xoa-khach-hang/2" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
+                    </td>
+                </tr>
+                <!-- Thêm các dòng dữ liệu khách hàng khác tại đây -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Hỗ Trợ Khách Hàng</title>
+    <style>
+        #MoreMenu::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 50px;
+    left: 0;
+    top: -30px;
+    position: absolute;
+}
+/* General Body Styling */
+body {
+    font-family: 'Times New Roman', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+}
+
+/* Header */
+#Header {
+    height: 80px;
+    width: 100%;
+    background-color: #4A4A4A;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Menu */
+#Menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+    border-radius: 40px;
+    background-color: #EEE8D8;
+    padding: 0 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+#Menu:hover {
+    background-color: #FFF8DC;
+}
+
+/* Link Menu */
+#Menu a {
+    margin: 0;
+    padding: 10px 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #696969;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+#Menu a:hover {
+    color: #000;
+    font-weight: bold;
+    text-shadow: 0px 0px 8px rgba(254, 78, 47, 0.7);
+}
+
+/* MORE... dropdown */
+#QuanLyTaiKhoan {
+    position: relative;
+    padding: 10px 20px;
+    color: #696969;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#QuanLyTaiKhoan:hover {
+    color: #000;
+    font-weight: bold;
+}
+
+#MoreMenu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #EEE8D8;
+    border-radius: 10px;
+    padding: 10px;
+    width: 220px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#MoreMenu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #696969;
+    font-size: 16px;
+    border-bottom: 1px solid #d1d1d1;
+    transition: color 0.3s ease;
+}
+
+#MoreMenu a:hover {
+    color: #000;
+    text-shadow: 0px 0px 5px rgba(54, 217, 216, 0.7);
+}
+
+/* Show More Menu on hover */
+#QuanLyTaiKhoan:hover #MoreMenu {
+    display: block;
+}
+
+
+        #Header h1 {
+            color: white;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+
+        /* Main Content */
+        #mainContent {
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        #mainContent h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Inquiry Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #36D9D8;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Reply Form */
+        .replyForm {
+            background-color: #EEE8D8;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .replyForm input, .replyForm textarea, .replyForm button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        .replyForm textarea {
+            resize: none;
+            height: 120px;
+        }
+
+        .replyForm button {
+            background-color: #36D9D8;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .replyForm button:hover {
+            background-color: #FE4E2F;
+        }
+    </style>
+</head>
+<body>
+    <div id="Header">
+        <div id="Menu">
+            <a href="Home.html"><p id="LinkMenu">Home</p></a>
+            <a href="QuanLyTaiKhoan.html"><p id="LinkMenu">Quản Lý Tài Khoản</p></a>
+            <a href="QuanLyPhim.html"><p id="LinkMenu">Quản Lý Phim</p></a>
+            <a href="QuanLyLichChieu.html"><p id="LinkMenu">Quản Lý Lịch Chiếu</p></a>
+            <a href="QuanLyDatVe.html"><p id="LinkMenu">Quản Lý Đặt Vé</p></a>
+
+            <div id="QuanLyTaiKhoan">
+                MORE...
+                <div id="MoreMenu">
+                    <a href="/Code-Admin/html/quanlighe.html">Quản Lý Ghế</a>
+                    <a href="/Code-Admin/html/quanlisukien.html">Quản Lý Sự Kiện</a>
+                    <a href="/Code-Admin/html/quanliphongchieu.html">Quản Lý Phòng Chiếu</a>
+                    <a href="/Code-Admin/html/thongke.html">Thống Kê</a>
+                    <a href="/Code-Admin/html/quanlikhuyenmai.html">Quản Lý Khuyến Mãi</a>
+                    <a href="/Code-Admin/html/quanlikhachhang.html">Quản Lý Khách Hàng</a>
+                    <a href="/Code-Admin/html/quanlinhanvien.html">Quản Lý Nhân Viên</a>
+                    <a href="/Code-Admin/html/hotrokhachhang.html">Hỗ Trợ Khách Hàng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header -->
+    <div id="Header">
+        <h1>Quản Lý Hỗ Trợ Khách Hàng</h1>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent">
+        <h2>Danh Sách Phản Hồi Của Khách Hàng</h2>
+
+        <!-- Customer Inquiries Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Tên Khách Hàng</th>
+                    <th>Email</th>
+                    <th>Nội Dung Phản Hồi</th>
+                    <th>Trả Lời</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="customerRow1">
+                    <td>Nguyễn Văn A</td>
+                    <td>nguyenvana@gmail.com</td>
+                    <td>Làm thế nào để đặt vé online?</td>
+                    <td>
+                        <!-- Reply Form for Admin -->
+                        <div class="replyForm">
+                            <form id="replyForm1">
+                                <textarea placeholder="Nhập nội dung trả lời..."></textarea>
+                                <button type="submit" onclick="replyToCustomer(1)">Gửi Trả Lời</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <tr id="customerRow2">
+                    <td>Trần Thị B</td>
+                    <td>tranthib@gmail.com</td>
+                    <td>Tôi có thể hủy vé đã đặt không?</td>
+                    <td>
+                        <!-- Reply Form for Admin -->
+                        <div class="replyForm">
+                            <form id="replyForm2">
+                                <textarea placeholder="Nhập nội dung trả lời..."></textarea>
+                                <button type="submit" onclick="replyToCustomer(2)">Gửi Trả Lời</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Add more customer inquiries as needed -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function replyToCustomer(customerId) {
+            // Get the corresponding form's content
+            var formId = 'replyForm' + customerId;
+            var replyContent = document.getElementById(formId).getElementsByTagName('textarea')[0].value;
+            
+            if (replyContent.trim() !== "") {
+                alert("Trả lời của bạn đã được gửi cho khách hàng.");
+                
+                // Remove the customer row from the table
+                var rowId = 'customerRow' + customerId;
+                var row = document.getElementById(rowId);
+                row.style.display = 'none';  // Hide the row after submitting the reply
+            } else {
+                alert("Vui lòng nhập nội dung trả lời.");
+            }
+        }
+    </script>
+</body>
+</html>
